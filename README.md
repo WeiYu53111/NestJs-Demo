@@ -1,0 +1,2 @@
+# Nest的HelloWord
+通过Nest结合TypeORM实现Restful API方式对数据库的表的查询和插入
