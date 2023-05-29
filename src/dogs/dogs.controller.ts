@@ -11,9 +11,9 @@ export class DogsController {
     }
 
     @Get(':id')
-    async create(@Param('id') id: string): string {
+    async create(@Param('id') id: string): Promise<string> {
         const dog = {
-            id: id,
+            id: Number(id),
             name: "dog_"+id
         }
         await this.dogsService.create(dog)
