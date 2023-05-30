@@ -14,7 +14,7 @@ import {Dog} from "./entity/dog.entity";
             database: 'test',
            /* entities: ["entity/!*.js"],*/
             entities:[Dog],
-            synchronize: true,
+            //synchronize: true,
         }),],
 })
 export class AppModule {

@@ -1,4 +1,4 @@
-import {Inject, Injectable} from '@nestjs/common';
+import {Inject, Injectable,Logger} from '@nestjs/common';
 //import {Dog} from "./interfaces/dog.interface";
 import {DataSource, Repository} from "typeorm";
 import {InjectRepository} from "@nestjs/typeorm";
@@ -8,9 +8,13 @@ import {DogInterface} from "./interfaces/dog.interface";
 @Injectable()
 export class DogsService {
 
+    private readonly logger = new Logger(DogsService.name);
+
     constructor(
         @InjectRepository(Dog) private usersRepository: Repository<Dog>,private dataSource: DataSource
     ) {
+
+        this.logger.log("init dog service")
         this.dogs = [];
     };
     private readonly dogs: Dog[] = [];
@@ -20,12 +24,15 @@ export class DogsService {
         const newDog = this.usersRepository.create()
         newDog.name = dog.name
         this.usersRepository.save(newDog).then(r => {
-            console.log("save dog "+newDog.id + " "+newDog.id);
+            //console.log("save dog "+newDog.id + " "+newDog.id);
             console.log(r)
+            this.logger.log("save dog "+newDog.id + " "+newDog.id)
         })
     }
 
     findAll() : Promise<Dog[]> {
+        this.logger.log("looking for all dogs ")
         return this.usersRepository.find()
+
     }
 }
